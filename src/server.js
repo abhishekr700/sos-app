@@ -3,18 +3,24 @@ const dotenv = require("dotenv")
 const bcrypt = require("bcrypt")
 const bodyParser = require('body-parser')
 const fs = require("fs")
+const path = require("path")
+
+const DATA_FILE_PATH = path.join(__dirname, "../data.txt")
+const ENV_FILE_PATH = path.join(__dirname, "../.env")
+
 dotenv.config({
-    path: "../.env"
+    path: ENV_FILE_PATH
 })
 
 const PORT = process.env.PORT
 const PASS_HASH = process.env.PASS_HASH
 
+
 console.log({
     PORT, PASS_HASH
 })
 
-const data = fs.readFileSync("../data.txt").toString()
+const data = fs.readFileSync(DATA_FILE_PATH).toString()
 
 const app = express()
 
