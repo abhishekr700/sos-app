@@ -10,7 +10,9 @@ dotenv.config({
 const PORT = process.env.PORT
 const PASS_HASH = process.env.PASS_HASH
 
-console.log(__dirname)
+console.log({
+    PORT, PASS_HASH
+})
 
 const data = fs.readFileSync("../data.txt").toString()
 
@@ -23,7 +25,11 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use("/", express.static(__dirname + "/public_html"))
 
 app.post("/emergencyData", async (req, res) => {
+    console.log("/emergencyData", req.body);
     const { password } = req.body
+    if (password === "" || password === null) {
+        return res.sendStatus(400)
+    }
     const hashCompareResult = await bcrypt.compare(password, PASS_HASH)
     console.log({ password, hashCompareResult });
 
