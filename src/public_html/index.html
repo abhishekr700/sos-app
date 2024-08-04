@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhishek's SOS Page</title>
+</head>
+<body>
+    <h1>SOS Page</h1>
+    Boy you must be in trouble ! <br>
+    <input type="password" id="input-password">
+    <input type="button" id="input-btn" title="sdf" value="Enter" onclick="handleBtn()">
+
+    <!-- Show all data in a pre tag for proper line breaks -->
+    <pre id="data">
+
+    </pre>
+
+    <script>
+        async function handleBtn(e) {
+            console.log("Btn Click", e);
+            const passField = document.getElementById("input-password")
+            const dataField = document.getElementById("data")
+            const password = passField.value
+            console.log(password);
+
+            const rawResponse = await fetch('/emergencyData', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ password: password })
+            });
+            const content = await rawResponse.text();
+
+            dataField.textContent = content
+
+            console.log(content);
+        }
+    </script>
+</body>
+</html>

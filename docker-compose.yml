@@ -1,0 +1,9 @@
+services:
+  sos-app:
+    build: .
+    container_name: sos-app
+    restart: unless-stopped
+    environment:
+      PORT: ${PORT}
+    ports:
+      - 
