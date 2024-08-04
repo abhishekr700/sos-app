@@ -6,4 +6,4 @@ services:
     environment:
       PORT: ${PORT}
     ports:
-      - 
+      - 3006:4000
