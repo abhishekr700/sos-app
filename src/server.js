@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt")
 const bodyParser = require('body-parser')
 const fs = require("fs")
 const path = require("path")
+const morgan = require("morgan")
 
 const DATA_FILE_PATH = path.join(__dirname, "../data.txt")
 const ENV_FILE_PATH = path.join(__dirname, "../.env")
@@ -24,6 +25,7 @@ const data = fs.readFileSync(DATA_FILE_PATH).toString()
 
 const app = express()
 
+app.use(morgan("dev"))
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
